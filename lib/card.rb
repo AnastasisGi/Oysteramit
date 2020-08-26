@@ -22,6 +22,12 @@ class Card
     @journey.start_point
   end
 
+  def touch_out(station)
+    @journey = @journey_class.new
+    @journey.end(station)
+    @journey.end_point
+  end
+
   private
 
   def not_enough_money?

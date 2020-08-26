@@ -32,12 +32,29 @@ describe 'a card' do
       journey_class = test_double
       journey = test_double
       allow(journey_class).to receive(:new){journey}
-      allow(journey).to receive(:start){}
+      allow(journey).to receive(:start) {}
       allow(journey).to receive(:start_point){"Kings Cross"}
       card = Card.new(journey_class:journey_class,balance:50)
       station = test_double
       expect(card.touch_in(station)).to  eq "Kings Cross"
     end
+
+
+
+    it "touches out to end a journey" do
+      journey_class = test_double
+      journey = test_double
+      allow(journey_class).to receive(:new){journey}
+      allow(journey).to receive(:end){}
+      allow(journey).to receive(:end_point){"Greenwich"}
+      card = Card.new(journey_class:journey_class,balance:50)
+      station = test_double
+      expect(card.touch_out(station)).to eq "Greenwich"
+    end
+
+
+
+
     it "does not start a journey if there is not enough money" do
       card = Card.new
       station = test_double
